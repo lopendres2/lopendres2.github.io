@@ -65,3 +65,12 @@ text-align: center;
 .usercard {
 	text-align: center;
 }
+body[data-theme="dark"] {
+	background-color: #1a1a1a;
+	color: white;
+}
+
+body[data-theme="light"] {
+        background-color: white;
+        color: black;
+}
