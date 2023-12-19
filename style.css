@@ -11,22 +11,9 @@ body {
     justify-content: space-between;
 }
 .container {
-	max-width: 360px;
+	widht: 100%;
 }
-.search-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin: 10px 0;
-  }
 
-  .search-box {
-	padding: 10px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	width: 100%;
-	outline: none;
-  }
 .inner {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -75,23 +62,6 @@ text-align: center;
 	background: rgb(250, 255, 250);
 }
 
-.basket{
-	position: fixed;
-	bottom: 0px;
-    width: 360px;
-    height: 40px;
-    border: none;
-	background: rgb(26 26 26);
-	color: #fff;
-	text-transform: uppercase;
-	font-weight: 700;
-    box-shadow: 0 0 4px rgb(255 255 255 / 30%);
-
-	transition: background .2s linear;
-}
-.basket:hover {
-	background: rgb(250, 255, 250);
-}
 .usercard {
 	text-align: center;
 }
