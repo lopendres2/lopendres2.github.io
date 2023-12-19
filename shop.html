@@ -51,15 +51,15 @@
 		
 	</div>
 	<script>
-      function setThemePreference() {
-        const isDarkMode = localStorage.getItem('isDarkMode') === 'true';
-        document.body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+		function setThemePreference() {
+        	const isDarkMode = localStorage.getItem('isDarkMode') === 'true';
+        	document.body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
       }
 
-      function toggleTheme() {
-        const isDarkMode = localStorage.getItem('isDarkMode') === 'true';
-        localStorage.setItem('isDarkMode', !isDarkMode);
-        setThemePreference();
+      		function toggleTheme() {
+        	const isDarkMode = localStorage.getItem('isDarkMode') === 'true';
+        	localStorage.setItem('isDarkMode', !isDarkMode);
+        	setThemePreference();
       }
 
       setThemePreference();
