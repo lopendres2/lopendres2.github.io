@@ -16,6 +16,3 @@ def on_click(event):
   if event.type == 'click':
     tg.MainButton.setText(f"Вы выбрали товар {item_id}!")
     item = item_id
-
-# Подписываемся на событие нажатия кнопки.
-document.querySelectorAll('.btn').forEach(button => button.addEventListener('click', on_click))
