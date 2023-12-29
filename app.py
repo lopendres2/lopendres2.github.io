@@ -9,13 +9,13 @@ tg.MainButton.color = '#2cab37'
 item = ""
 
 def on_click(event):
-    if tg.MainButton.isVisible:
-        tg.MainButton.hide()
-    else:
-        tg.MainButton.setText(f"Вы выбрали товар {event.target.id[-1]}!")
-        item = event.target.id[-1]
-        tg.MainButton.show()
+  # Получаем идентификатор товара из атрибута data-id кнопки.
+  item_id = event.target.dataset['id']
 
-for i in range(1, 7):
-    btn = document[f"btn{i}"]
-    btn.bind("click", on_click)
+  # Если кнопка нажата, то отображаем ее название в кнопке MainButton.
+  if event.type == 'click':
+    tg.MainButton.setText(f"Вы выбрали товар {item_id}!")
+    item = item_id
+
+# Подписываемся на событие нажатия кнопки.
+document.querySelectorAll('.btn').forEach(button => button.addEventListener('click', on_click))
