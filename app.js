@@ -23,31 +23,40 @@ function updateCart() {
     tg.MainButton.setText(`В корзине: ${cart.join(", ")}`);
 }
 
-btn1.addEventListener("click", function(){
-    addToCart("Товар 1");
+function handleButtonClick(itemText) {
+    if (tg.MainButton.isVisible) {
+        tg.MainButton.hide();
+    } else {
+        addToCart(itemText);
+        tg.MainButton.show();
+    }
+}
+
+btn1.addEventListener("click", function() {
+    handleButtonClick("Товар 1");
 });
 
-btn2.addEventListener("click", function(){
-    addToCart("Товар 2");
+btn2.addEventListener("click", function() {
+    handleButtonClick("Товар 2");
 });
 
-btn3.addEventListener("click", function(){
-    addToCart("Товар 3");
+btn3.addEventListener("click", function() {
+    handleButtonClick("Товар 3");
 });
 
-btn4.addEventListener("click", function(){
-    addToCart("Товар 4");
+btn4.addEventListener("click", function() {
+    handleButtonClick("Товар 4");
 });
 
-btn5.addEventListener("click", function(){
-    addToCart("Товар 5");
+btn5.addEventListener("click", function() {
+    handleButtonClick("Товар 5");
 });
 
-btn6.addEventListener("click", function(){
-    addToCart("Товар 6");
+btn6.addEventListener("click", function() {
+    handleButtonClick("Товар 6");
 });
 
-Telegram.WebApp.onEvent("mainButtonClicked", function(){
+Telegram.WebApp.onEvent("mainButtonClicked", function() {
     // Дополнительные действия при нажатии на главную кнопку, если нужны
     // Например, отправка данных из корзины
     tg.sendData(cart);
