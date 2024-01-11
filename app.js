@@ -20,16 +20,22 @@ function addToCart(item) {
 }
 
 function updateCart() {
+    // Дополнительные действия при обновлении корзины, если нужны
+    // Например, обновление отображения на странице
+}
+
+function showCart() {
     tg.MainButton.setText(`В корзине: ${cart.join(", ")}`);
+    tg.MainButton.show();
+}
+
+function hideCart() {
+    tg.MainButton.hide();
 }
 
 function handleButtonClick(itemText) {
-    if (tg.MainButton.isVisible) {
-        tg.MainButton.hide();
-    } else {
-        addToCart(itemText);
-        tg.MainButton.show();
-    }
+    addToCart(itemText);
+    showCart();
 }
 
 btn1.addEventListener("click", function() {
@@ -60,6 +66,7 @@ Telegram.WebApp.onEvent("mainButtonClicked", function() {
     // Дополнительные действия при нажатии на главную кнопку, если нужны
     // Например, отправка данных из корзины
     tg.sendData(cart);
+    hideCart();
 });
 
 let usercard = document.getElementById("usercard");
