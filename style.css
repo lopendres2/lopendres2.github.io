@@ -27,6 +27,13 @@ body {
 	width: 100%;
   height: 200px;
 }
+a {
+  text-decoration: none;
+  color: inherit;
+}
+a :hover{
+  text-decoration: underline;
+}
 
 .item {
 text-align: center;
