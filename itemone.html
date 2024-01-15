@@ -1,112 +1,114 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mnaynamna</title>
   <link rel="stylesheet" href="itemone.css">
   <link rel="stylesheet" href="light.css" media="(prefers-color-scheme: light)">
   <link rel="stylesheet" href="dark.css" media="(prefers-color-scheme: dark)">
 </head>
+
 <body>
-    <div class="container">
-          <div class="slider" id="slider">
-            <div class="slides" id="slides">
-                <div class="slide"><img src="./img/перчатки.jpg" alt="" class="img"></div>
-                <div class="slide"><img src="./img/another-image.jpg" alt="" class="img"></div>
-                <div class="slide"><img src="./img/yet-another-image.jpg" alt="" class="img"></div>
-          </div>
-        </div>
-        <div class="dots" id="dotContainer"></div>
-        <h1>Варежки</h1>
-        <p class="title">Описание</p>
-        <p class="description">
-            Вязанные варежки — теплые и уютные аксессуары, созданные для защиты ваших рук от холода.
-            Связаны с любовью из мягкой и приятной на ощупь пряжи, они станут надежными спутниками в
-            холодное время года. Простые и элегантные, они подчеркнут ваш стиль и согреют в самые морозные дни.</p>
-
+  <div class="container">
+    <div class="slider" id="slider">
+      <div class="slides" id="slides">
+        <div class="slide"><img src="./img/перчатки.jpg" alt="" class="img"></div>
+        <div class="slide"><img src="./img/another-image.jpg" alt="" class="img"></div>
+        <div class="slide"><img src="./img/yet-another-image.jpg" alt="" class="img"></div>
+      </div>
     </div>
-    <script>
-      function setThemePreference() {
-        const isDarkMode = localStorage.getItem('isDarkMode') === 'true';
-        document.body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+    <div class="dots" id="dotContainer"></div>
+    <h1>Варежки</h1>
+    <p class="title">Описание</p>
+    <p class="description">
+      Вязанные варежки — теплые и уютные аксессуары, созданные для защиты ваших рук от холода.
+      Связаны с любовью из мягкой и приятной на ощупь пряжи, они станут надежными спутниками в
+      холодное время года. Простые и элегантные, они подчеркнут ваш стиль и согреют в самые морозные дни.
+    </p>
+  </div>
+  <script>
+    const images = ['./img/перчатки.jpg', './img/another-image.jpg', './img/yet-another-image.jpg'];
+    const slidesContainer = document.getElementById('slides');
+    const dotContainer = document.getElementById('dotContainer');
+    let currentSlide = 0;
+    let startX;
+    let isSwiping = false;
+
+    function setSlide(index) {
+      const offset = -index * 100 + '%';
+      slidesContainer.style.transform = 'translateX(' + offset + ')';
+      currentSlide = index;
+      updateDots();
+    }
+
+    function nextSlide() {
+      setSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      setSlide(currentSlide - 1);
+    }
+
+    function updateDots() {
+      dotContainer.innerHTML = '';
+      for (let i = 0; i < images.length; i++) {
+        const dot = document.createElement('div');
+        dot.className = `dot ${i === currentSlide ? 'active' : ''}`;
+        dot.onclick = () => setSlide(i);
+        dotContainer.appendChild(dot);
       }
-    
-      function toggleTheme() {
-        const isDarkMode = localStorage.getItem('isDarkMode') === 'true';
-        localStorage.setItem('isDarkMode', !isDarkMode);
-        setThemePreference();
+    }
+
+    function handleTouchStart(event) {
+      startX = event.touches[0].clientX;
+      isSwiping = true;
+    }
+
+    function handleTouchMove(event) {
+      if (!isSwiping) return;
+      const diffX = event.touches[0].clientX - startX;
+      slidesContainer.style.transition = 'transform 0s ease';
+      slidesContainer.style.transform = 'translateX(' + (-currentSlide * 100 + diffX) + '%';
+    }
+
+    function handleTouchEnd(event) {
+      if (!isSwiping) return;
+      isSwiping = false;
+      slidesContainer.style.transition = 'transform 0.5s ease';
+      const threshold = 0.2;
+      const distance = event.changedTouches[0].clientX - startX;
+
+      if (Math.abs(distance) > window.innerWidth * threshold) {
+        if (distance > 0) {
+          prevSlide();
+        } else {
+          nextSlide();
+        }
+      } else {
+        setSlide(currentSlide);
       }
-    
-      setThemePreference();
-      </script>
-      <script>
-        const images = ['./img/перчатки.jpg', './img/another-image.jpg', './img/yet-another-image.jpg'];
-        const slidesContainer = document.getElementById('slides');
-        const dotContainer = document.getElementById('dotContainer');
-        let currentSlide = 0;
-        let startX;
+    }
 
-        function setSlide(index) {
-            const offset = -index * 100 + '%';
-            slidesContainer.style.transform = 'translateX(' + offset + ')';
-            currentSlide = index;
-            updateDots();
-        }
+    function initializeSlider() {
+      updateDots();
+      slidesContainer.addEventListener('touchstart', handleTouchStart);
+      slidesContainer.addEventListener('touchmove', handleTouchMove);
+      slidesContainer.addEventListener('touchend', handleTouchEnd);
 
-        function nextSlide() {
-            setSlide(currentSlide + 1);
-        }
+      // Дополнительные обработчики для восстановления слайдера после свайпа
+      slidesContainer.addEventListener('transitionend', () => {
+        slidesContainer.style.transition = 'none';
+        slidesContainer.style.transform = 'translateX(' + (-currentSlide * 100) + '%)';
+        setTimeout(() => {
+          slidesContainer.style.transition = 'transform 0.5s ease';
+        });
+      });
+    }
 
-        function prevSlide() {
-            setSlide(currentSlide - 1);
-        }
-
-        function updateDots() {
-            dotContainer.innerHTML = '';
-            for (let i = 0; i < images.length; i++) {
-                const dot = document.createElement('div');
-                dot.className = `dot ${i === currentSlide ? 'active' : ''}`;
-                dot.onclick = () => setSlide(i);
-                dotContainer.appendChild(dot);
-            }
-        }
-
-        function handleTouchStart(event) {
-            startX = event.touches[0].clientX;
-        }
-
-        function handleTouchMove(event) {
-            const diffX = event.touches[0].clientX - startX;
-            slidesContainer.style.transition = 'transform 0s ease';
-            slidesContainer.style.transform = 'translateX(' + (-currentSlide * 100 + diffX) + '%';
-        }
-
-        function handleTouchEnd() {
-            slidesContainer.style.transition = 'transform 0.5s ease';
-            const threshold = 0.2;
-            const distance = event.changedTouches[0].clientX - startX;
-
-            if (Math.abs(distance) > window.innerWidth * threshold) {
-                if (distance > 0) {
-                    prevSlide();
-                } else {
-                    nextSlide();
-                }
-            } else {
-                setSlide(currentSlide);
-            }
-        }
-
-        function initializeSlider() {
-            updateDots();
-            slidesContainer.addEventListener('touchstart', handleTouchStart);
-            slidesContainer.addEventListener('touchmove', handleTouchMove);
-            slidesContainer.addEventListener('touchend', handleTouchEnd);
-        }
-
-        initializeSlider();
-    </script>
-
+    initializeSlider();
+  </script>
 </body>
+
 </html>
