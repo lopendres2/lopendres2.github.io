@@ -14,9 +14,6 @@
   <div class="container">
     <div class="slider" id="slider">
       <div class="slides" id="slides">
-        <div class="slide"><img src="./img/перчатки.jpg" alt="" class="img"></div>
-        <div class="slide"><img src="./img/another-image.jpg" alt="" class="img"></div>
-        <div class="slide"><img src="./img/yet-another-image.jpg" alt="" class="img"></div>
       </div>
     </div>
     <div class="dots" id="dotContainer"></div>
@@ -29,12 +26,13 @@
     </p>
   </div>
   <script>
-    const images = ['./img/перчатки.jpg', './img/another-image.jpg', './img/yet-another-image.jpg'];
-    const slidesContainer = document.getElementById('slides');
-    const dotContainer = document.getElementById('dotContainer');
+    const images = ['./img/перчатки.jpg', './img/топ.jpg', './img/шапки.jpg'];
+    const slidesContainer = document.querySelector('.slides');
+    const dotContainer = document.querySelector('#dotContainer');
     let currentSlide = 0;
     let startX;
-    let isSwiping = false;
+    let isSwiping = true;
+    
 
     function setSlide(index) {
       const offset = -index * 100 + '%';
@@ -91,7 +89,23 @@
       }
     }
 
+    function createSlides(){
+      let frag = document.createDocumentFragment();
+      images.forEach((el,i)=>{
+        let slide = document.createElement('div');
+        let img = document.createElement('img');
+        slide.classList.add('slide');
+        img.classList.add('img');
+        img.setAttribute('src', el)
+        img.setAttribute('alt', i)
+        slide.appendChild(img)
+        frag.appendChild(slide)
+      })
+      slidesContainer.appendChild(frag)
+    }
+
     function initializeSlider() {
+      createSlides();
       updateDots();
       slidesContainer.addEventListener('touchstart', handleTouchStart);
       slidesContainer.addEventListener('touchmove', handleTouchMove);

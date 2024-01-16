@@ -7,12 +7,21 @@ tg.MainButton.color = '#0f53e6';
 
 let cart = [];
 
-let btn1 = document.getElementById("btn1");
-let btn2 = document.getElementById("btn2");
-let btn3 = document.getElementById("btn3");
-let btn4 = document.getElementById("btn4");
-let btn5 = document.getElementById("btn5");
-let btn6 = document.getElementById("btn6");
+const container = document.querySelector('.inner')
+
+
+container.addEventListener("click", onClick);
+
+function onClick(event){
+    const current = event.target;
+
+    if(!current.classList.contains('btn')){
+        return ;
+    }
+
+    handleButtonClick('Товар' + ' ' + current.id)
+
+}
 
 function addToCart(item) {
     cart.push(item);
@@ -25,7 +34,7 @@ function updateCart() {
 }
 
 function showCart() {
-    tg.MainButton.setText(`В корзине: ${cart.join(", ")}`);
+    tg.MainButton.setText(`В корзине: ${cart.length} товаров`);
     tg.MainButton.show();
 }
 
@@ -38,29 +47,6 @@ function handleButtonClick(itemText) {
     showCart();
 }
 
-btn1.addEventListener("click", function() {
-    handleButtonClick("Товар 1");
-});
-
-btn2.addEventListener("click", function() {
-    handleButtonClick("Товар 2");
-});
-
-btn3.addEventListener("click", function() {
-    handleButtonClick("Товар 3");
-});
-
-btn4.addEventListener("click", function() {
-    handleButtonClick("Товар 4");
-});
-
-btn5.addEventListener("click", function() {
-    handleButtonClick("Товар 5");
-});
-
-btn6.addEventListener("click", function() {
-    handleButtonClick("Товар 6");
-});
 
 Telegram.WebApp.onEvent("mainButtonClicked", function() {
     // Дополнительные действия при нажатии на главную кнопку, если нужны
