@@ -1,0 +1,24 @@
+.container{
+    width: 100%;
+    padding-top: 10px;
+    box-sizing: border-box;
+}
+.container_flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+}
+.container__title{
+   margin: 10px 0;
+}
+.container__title_small{
+    font-size: 20px;
+    margin-bottom: 15px;
+    margin: 10px 0;
+}
+.container__description{
+    font-size: 18px;
+    text-align: justify;
+    margin: 0;
+}

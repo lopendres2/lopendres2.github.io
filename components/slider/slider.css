@@ -1,0 +1,24 @@
+.slider{
+    position: relative;
+    overflow: hidden;
+}
+.slider__slides{
+    display: flex;
+    transition: transform 0.5s ease;
+    height: 500px;
+}
+.slider__slide{
+    position: relative;
+    min-width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    padding-bottom: 100%;
+}
+.slider__img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left:0;
+    object-fit: fill;
+}

@@ -1,3 +1,10 @@
+@import url('./components/item/item.css');
+@import url('./components/container/container.css');
+@import url('./components/inner/inner.css');
+@import url('./components/usercard/usercard.css');
+@import url('./components/slider/slider.css');
+@import url('./components/dots/dots.css');
+
 html{
     height: 100%;
 }
@@ -10,89 +17,3 @@ body {
     padding: 0 10px;
 }
 
-.container {
-	width: 100%;
-  padding-top: 10px;
-  box-sizing: border-box;
-}
-
-.inner {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	justify-items: center;
-	grid-gap: 5px 10px;
-}
-
-.img__box{
-  position: relative;
-  width: 100%;
-  padding-bottom: 100%;
-}
-
-.img {
-  position: absolute;
-  top: 0;
-  left: 0;
-	width: 100%;
-  height: 100%;
-  object-fit: fill;
-}
-a {
-  text-decoration: none;
-  color: inherit;
-}
-a:hover{
-  text-decoration: underline;
-}
-
-.item {
-  padding: 10px;
-  width: 90%;
-  border: 1px solid var(--border-color);
-  border-radius: 5px;
-}
-
-.price{
-  text-align: left;
-  margin: 0;
-  padding-top: 5px;
-}
-
-.name_item{
-  text-align: left;
-  margin: 0;
-  padding-top: 5px;
-}
-.btn {
-  margin-top: 10px;
-	display: inline-block;
-	padding: 7px 0;
-	background: var(--btn-border-color);
-	border-radius: 5px;
-	color: var(--bg-color);
-	text-transform: uppercase;
-	font-weight: 700;
-  box-shadow: var(--shadow);
-  border: 1px solid var(--btn-border-color);
-  width: 100%;
-
-	transition: background .2s linear;
-}
-
-.btn:hover {
-	background: var(--bg-color);
-  color: var(--btn-border-color);
-}
-
-.usercard {
-	text-align: center;
-}
-/* body[data-theme="dark"] {
-	background-color: #1a1a1a;
-	color: white;
-}
-
-body[data-theme="light"] {
-        background-color: white;
-        color: black;
-} */
