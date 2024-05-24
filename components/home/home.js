@@ -10,12 +10,13 @@ export class Home {
         </div>
       `;
       this.container ;
-        this.render();
+      this.render();
     }
   
     render() {
       this.hostElement.innerHTML = this.template;
       this.container = this.hostElement.querySelector('.inner');
+      console.log(this.data)
       this.renderCarts();
       this.applyHandler()
     }

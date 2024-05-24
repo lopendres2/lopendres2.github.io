@@ -1,12 +1,10 @@
 import { Router } from "../../utils/router.js";
 import { data } from '../../data/data.js';
-import { Telegram } from '../telegram/telegram.js';
 
 export class App {
   router = new Router([]);
   template = ``;
-  items = data;
-  telegram = new Telegram();
+  items = fetch('https://github.com/lopendres2/lopendres2.github.io/blob/main/data/data.js');
 
   constructor(hostElement) {
     this.hostElement = hostElement;
@@ -18,13 +16,13 @@ export class App {
     this.router.add("Home", () => {
       this.hostElement.innerHTML = "";
       import("../home/home.js").then(({ Home }) => {
-        new Home(this.items, this.hostElement).render();
+        new Home(this.items.json(), this.hostElement).render();
       });
     });
     this.router.add("About", () => {
       this.hostElement.innerHTML = "";
       import("../about/about.js").then(({ About }) => {
-        new About(this.items, this.hostElement).render();
+        new About(this.items.json(), this.hostElement).render();
       });
     });
     this.router.onHashChange();
