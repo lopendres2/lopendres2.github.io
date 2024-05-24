@@ -12,7 +12,7 @@ export class App {
 
   async render() {
     this.hostElement.innerHTML = this.template;
-    await fetch('https://raw.githubusercontent.com/lopendres2/lopendres2.github.io/main/data/data.js').then((data) => {
+    await fetch('https://raw.githubusercontent.com/lopendres2/lopendres2.github.io/main/data/data.json').then((data) => {
       this.item = data.json()
   });
 
