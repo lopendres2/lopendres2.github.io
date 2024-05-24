@@ -1,10 +1,12 @@
 import { Router } from "../../utils/router.js";
-import { data } from '../../data/data.js'
+import { data } from '../../data/data.js';
+import { Telegram } from '../telegram/telegram.js';
 
 export class App {
   router = new Router([]);
   template = ``;
-  items = data
+  items = data;
+  telegram = new Telegram();
 
   constructor(hostElement) {
     this.hostElement = hostElement;

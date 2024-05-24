@@ -5,7 +5,6 @@ const Application = new App(document.querySelector(".app"));
 Application.render();
 
 const tg = new Telegram();
-tg.render();
 
 
 

@@ -1,13 +1,13 @@
 export class Telegram {
     constructor(){
         this.tg = window.Telegram.WebApp;
+        this.render();
+        this.applyHandler();
     }
     render(){
         this.tg.expand();
         this.tg.MainButton.textColor = '#FFFFFF';
-        this.tg.MainButton.color = '#0f53e6';
-        this.applyHandler();
-        
+        this.tg.MainButton.color = '#0f53e6'; 
     }
     applyHandler(){
         this.tg.onEvent("mainButtonClicked", function() {
