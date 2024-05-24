@@ -4,7 +4,7 @@ import { data } from '../../data/data.js';
 export class App {
   router = new Router([]);
   template = ``;
-  items = await fetch('https://raw.githubusercontent.com/lopendres2/lopendres2.github.io/main/data/data.js');
+  items
 
   constructor(hostElement) {
     this.hostElement = hostElement;
@@ -12,7 +12,8 @@ export class App {
 
   async render() {
     this.hostElement.innerHTML = this.template;
-
+    this.items = await fetch('https://raw.githubusercontent.com/lopendres2/lopendres2.github.io/main/data/data.js');
+    
     this.router.add("Home", () => {
       this.hostElement.innerHTML = "";
       import("../home/home.js").then(({ Home }) => {
