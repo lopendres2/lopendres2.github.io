@@ -4,7 +4,7 @@ import { data } from '../../data/data.js';
 export class App {
   router = new Router([]);
   template = ``;
-  items = fetch('https://raw.githubusercontent.com/lopendres2/lopendres2.github.io/blob/main/data/data.js',  { mode: 'no-cors'});
+  items = fetch('https://raw.githubusercontent.com/lopendres2/lopendres2.github.io/blob/main/data/data.js');
 
   constructor(hostElement) {
     this.hostElement = hostElement;
