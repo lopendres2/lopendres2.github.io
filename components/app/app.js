@@ -13,6 +13,7 @@ export class App {
     this.hostElement.innerHTML = this.template;
     await fetch('https://raw.githubusercontent.com/lopendres2/lopendres2.github.io/main/data/data.json').then((data) => {
       this.item = data.json()
+      console.log(data.json());
   });
 
     this.router.add("Home", () => {
