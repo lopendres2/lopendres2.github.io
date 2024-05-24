@@ -1,5 +1,4 @@
 import { Router } from "../../utils/router.js";
-import { data } from '../../data/data.js';
 
 export class App {
   router = new Router([]);
