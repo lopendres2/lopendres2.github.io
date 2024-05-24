@@ -6,7 +6,7 @@ export class Cart {
     }
 
     applyHandler(){
-        Telegram.WebApp.onEvent("mainButtonClicked", function() {
+        this.tg.onEvent("mainButtonClicked", function() {
             // Дополнительные действия при нажатии на главную кнопку, если нужны
             // Например, отправка данных из корзины
             tg.sendData(cart);
