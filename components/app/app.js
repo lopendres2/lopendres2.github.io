@@ -15,7 +15,7 @@ export class App {
      return data.json()
   }).then((data) => {
     this.item = data;
-    console.log(data);
+    console.log(this.item);
   });
 
     this.router.add("Home", () => {
