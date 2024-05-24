@@ -8,6 +8,7 @@ export class Telegram {
         this.tg.expand();
         this.tg.MainButton.textColor = '#FFFFFF';
         this.tg.MainButton.color = '#0f53e6'; 
+        console.log('work')
     }
     applyHandler(){
         this.tg.onEvent("mainButtonClicked", function() {
