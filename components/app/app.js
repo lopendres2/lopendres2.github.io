@@ -10,7 +10,7 @@ export class App {
       return data.json();
     })
     .then((data) => {
-      this.render(data);
+      // this.render(data);
     });
 
   constructor(hostElement) {
