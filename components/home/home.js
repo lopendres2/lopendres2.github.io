@@ -9,12 +9,14 @@ export class Home {
         </div>
       `;
     this.container;
+    this.WebApp = window.Telegram.WebApp;
     this.render();
   }
 
   render() {
     this.hostElement.innerHTML = this.template;
     this.container = this.hostElement.querySelector(".inner");
+    alert("home render");
     this.renderCarts();
     this.applyHandler();
   }
@@ -33,9 +35,10 @@ export class Home {
     console.log("Товар" + " " + current.id);
   }
 
-  async renderCarts() {
+  renderCarts() {
     let text = "";
-    await this.data.forEach((el, i) => {
+    alert("render cards");
+    this.data.forEach((el, i) => {
       let item = `<a href="#about/item=${i}" class="item">
           <div class="item__img-box">
               <img src="${el.img[0]}" alt="" class="item__img">
@@ -47,7 +50,5 @@ export class Home {
       text = text + item;
     });
     this.container.innerHTML = text;
-
-    alert(this.container.innerHTML);
   }
 }
