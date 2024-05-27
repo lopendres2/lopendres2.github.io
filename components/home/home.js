@@ -47,5 +47,7 @@ export class Home {
       text = text + item;
     });
     this.container.innerHTML = text;
+
+    alert(this.container.innerHTML);
   }
 }

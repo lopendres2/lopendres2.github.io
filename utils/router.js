@@ -19,7 +19,6 @@ export class Router {
   }
 
   onHashChange() {
-    alert("work");
     let current = location.hash.slice(1);
 
     if (!current) {
