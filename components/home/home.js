@@ -5,47 +5,26 @@ export class Home {
       this.template = `
           <div class="container">
               <div class="inner"></div>
-              <div class="usercard" id="usercard"></div>
           </div>
       `;
-      this.container;
-      this.cart = new Cart(); // Инициализация корзины
       this.render();
   }
 
   render() {
       this.hostElement.innerHTML = this.template;
       this.container = this.hostElement.querySelector(".inner");
-      this.renderCarts();
-      this.applyHandler();
+      this.renderCategories();
   }
 
-  applyHandler() {
-      this.container.addEventListener("click", this.onClick.bind(this));
-  }
-
-  onClick(event) {
-      const current = event.target;
-
-      if (!current.classList.contains("item__btn")) {
-          return;
-      }
-
-      const itemId = current.id;
-      const selectedItem = this.data[itemId];
-      this.cart.addToCart(selectedItem); // Добавляем товар в корзину
-  }
-
-  renderCarts() {
+  renderCategories() {
+      const categories = ["обувь", "майки", "кроссы"];
       let text = "";
-      this.data.forEach((el, i) => {
-          let item = `<a href="#about/item=${i}" class="item">
+      categories.forEach((category, i) => {
+          let item = `<a href="#category/${category}" class="item">
               <div class="item__img-box">
-                  <img src="${el.img[0]}" alt="" class="item__img">
+                  <img src="https://via.placeholder.com/150" alt="${category}" class="item__img">
               </div>
-              <p class="item__text">${el.price}</p>
-              <p class="item__text">${el.name}</p>
-              <button class="item__btn" id="${i}">+ Добавить</button>
+              <p class="item__text">${category}</p>
           </a>`;
           text = text + item;
       });
