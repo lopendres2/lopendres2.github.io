@@ -1,6 +1,6 @@
 export class Home {
   constructor(data, hostElement) {
-      this.data = data;
+      this.data = Array.isArray(data) ? data : [];
       this.hostElement = hostElement;
       this.template = `
           <div class="container">
@@ -16,18 +16,31 @@ export class Home {
       this.renderCategories();
   }
 
-  renderCategories() {
-      const categories = ["обувь", "майки", "кроссы"];
-      let text = "";
-      categories.forEach((category, i) => {
-          let item = `<a href="#category/${category}" class="item">
-              <div class="item__img-box">
-                  <img src="https://via.placeholder.com/150" alt="${category}" class="item__img">
-              </div>
-              <p class="item__text">${category}</p>
-          </a>`;
-          text = text + item;
+  // Категории собираются из data.json, чтобы не расходиться с товарами
+  getCategories() {
+      const categories = new Map();
+      this.data.forEach((item) => {
+          const name = item.category || "Без категории";
+          if (!categories.has(name)) {
+              categories.set(name, (item.img && item.img[0]) || "");
+          }
       });
-      this.container.innerHTML = text;
+      return [...categories.entries()].map(([name, img]) => ({ name, img }));
+  }
+
+  renderCategories() {
+      const categories = this.getCategories();
+      if (!categories.length) {
+          this.container.innerHTML = `<p class="item__text">Каталог пока пуст.</p>`;
+          return;
+      }
+      this.container.innerHTML = categories
+          .map(({ name, img }) => `<a href="#category/${encodeURIComponent(name)}" class="item">
+              <div class="item__img-box">
+                  <img src="${img}" alt="${name}" class="item__img" loading="lazy">
+              </div>
+              <p class="item__text">${name}</p>
+          </a>`)
+          .join("");
   }
 }

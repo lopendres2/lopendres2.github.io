@@ -17,13 +17,18 @@ export class Category {
     }
 
     renderItems() {
-        const category = location.hash.split("/")[1];
+        // В hash категория закодирована (например %D0%BE%D0%B1%D1%83%D0%B2%D1%8C)
+        const category = decodeURIComponent(location.hash.split("/")[1] || "");
         const items = this.data.filter(item => item.category === category);
+        if (!items.length) {
+            this.container.innerHTML = `<p class="item__text">В категории «${category}» пока нет товаров.</p>`;
+            return;
+        }
         let text = "";
         items.forEach((item, i) => {
             let itemHtml = `<div class="item">
                 <div class="item__img-box">
-                    <img src="${item.img[0]}" alt="${item.name}" class="item__img">
+                    <img src="${(item.img && item.img[0]) || ""}" alt="${item.name}" class="item__img" loading="lazy">
                 </div>
                 <p class="item__text">${item.name}</p>
                 <p class="item__text">${item.description}</p>

@@ -21,12 +21,24 @@ export class App {
         }, 300000); // 300000 мс = 5 минут
     }
 
-    // Функция для загрузки данных
+    // Функция для загрузки данных: сначала локальный файл (Pages и локальный сервер),
+    // затем резервный источник на raw.githubusercontent.com
     async fetchData() {
-        const response = await fetch(
-            "https://raw.githubusercontent.com/lopendres2/lopendres2.github.io/main/data/data.json"
-        );
-        return await response.json();
+        const sources = [
+            "./data/data.json",
+            "https://raw.githubusercontent.com/lopendres2/lopendres2.github.io/main/data/data.json",
+        ];
+        for (const url of sources) {
+            try {
+                const response = await fetch(url, { cache: "no-store" });
+                if (!response.ok) continue;
+                const data = await response.json();
+                if (Array.isArray(data)) return data;
+            } catch (error) {
+                // пробуем следующий источник
+            }
+        }
+        return [];
     }
 
     render(data) {
